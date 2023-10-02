@@ -1,6 +1,6 @@
 ## # 1
 - Hello, ladies and gentlemen, sir.
-- I'm Hwang In Taek, a Korean Navy Perry Officer second, on a duty of military service as a Reserach and Development Soldier in the Naval Future Innovation Research Group.
+- I'm Hwang In Taek, a Korean Navy Perry Officer second, on a duty of military service in the Naval Future Innovation Research Group.
 - I'm honored to introduce our project and recent experimental results to you guys.
 
 ## # 2
@@ -12,7 +12,7 @@
 - Following the trend, from December 2021, Korean Navy has started to construct the Naval Regulation Chatbot system, in which users can input what they wanna ask about regulation and get the answer from the LLM.
 - As a matter of fact, the current naval regulation search system only depends on keyword-based search algorithm which cannot find proper regulations unless words in a query and regulations are exactly matched each other.
 - Therefore, to increase accessibility to regulations and utilization of them, our project aims to make the Naval Regulation Chatbot which can analyze a query semantically and response to the query in a dialog form.
-- This system can contribute to heightening the efficiency of work and providing useful guidelines for junior officers.
+- This system can contribute to improve the efficiency of work and providing useful guidelines for junior officers.
 
 ## # 4
 - However, current LLMs are struggling with hallucinating problem which means that they sometimes generate text that factually incorrect or nonsensical.
@@ -23,7 +23,7 @@
 ## # 5
 - In order to find more exactly relevant regulations and articles, we've decided to make a knowledge base for korean naval regulations by extracting text from raw pdf files and organizing them in a structured form.
 - So, in the presentation, we suggest a data pipeline in which raw regulation data is extracted, tranformed, and loaded into the knowledge base.
-- And then, we put to test by applying the knowledge base to the latest open-source retriever to check out how well the knowledge base has been constructed.
+- And then, we put the knowledge base to the test by applying to the latest open-source retriever to check out how well the knowledge base has been constructed.
 
 ## # 6
 - Actually, there are many structured formats we can utilize for constructing the knowledge base, such as RDBMS, excel, etc.
@@ -34,14 +34,24 @@
 
 ## # 7
 - So, let's move on to a brief trend in retriever.
-- Classically, for searching documents related to a query, Bag-Of-Words algorithms are widely used.
-- Before receiving queries, the algorithms give weight to each words in all documents based on word frequency.
+- Classically, as a statistical approach for searching documents, Bag-Of-Words algorithm is widely used.
+- Before receiving queries, the algorithm give weight to each words in all documents based on word frequency.
 - At that time, basically, the more often a word appears, the more weight it has.
-- But if the word appears across all documents, its weight would be reduced, because it is used so usually that the word may not have to do with specific documents such as personal pronouns and prepositions.
+- But if the word appears across all documents, its weight would be reduced, because it is used so usually that it may not have to do with specific documents such as personal pronouns and prepositions.
 - On the other hand, if a word often appears in specific documents, it can get more weight because the word is likely to implicit topics the documents have.
 - So, when we get a query, we can create query vector and document vectors by using words in the query.
 - Finally we can find relevant documents that have vectors in the proximity of the query vector.
 
 ## # 8
+- But, the classical approach has two limitations. 
+- Actually, when it performs, It creates a vocabulary.
+- And when making vectors, it refers only stuff about words in the vocabulary, as ignoring unknown words out of the vocabulary.
+- Besides, even if a query has synonyms of words in the vocabulary, the algorithm cannot answer properly because it still perceives the synonyms as unknown words.
+- From last years, however, Deep Learning has been approved as one of the powerful algorithms and it starts to be applied to resolve the limitations.
+- As you guys can see on the right, Dense Vector model, as a deep Learning approach, receives queries and documents and outputs their vectors directly.
+- At that time, in addition to resolving the limitations, it also comprehends contextual meaning of words, which can facilitates creating optimal vectors of long-text documents.
+- Eventually, we select E5 model, as the state-of-the-art model by microsoft, to verify quality of the knowledge base and performance of the retriever.
+
+## # 9
 - ...
 
