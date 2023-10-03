@@ -53,5 +53,15 @@
 - Eventually, we select E5 model, as the state-of-the-art model by microsoft, to verify quality of the knowledge base and performance of the retriever.
 
 ## # 9
-- ...
+- So, we got 269 regulation pdf files from Korean Navy's intranet.
+- And in order to construct the HTML-formated knowledge base, we firstly had to go through a preprocessing pipeline in which raw pdf files can be converted to cleansed and organized text files.
+- It took us about 3 months to go through the pipeline.
+- At the same time, we succeeded in implementing automation in preprocessing and HTML construction except for one or two manual steps, through which we hope that it's much easier and faster to construct knowledge bases for other regulations in military afterward.
+
+## # 10
+- Fo automation in HTML construction, we first check out regulation writing rules written by Korean Navy.
+- Then following the rules, we established some strategies, and based on them we created definitions for clauses like this table on the right, and finally wrote python code for the automation.
+- Actually, as I said, the automation is following the regulation writing rules strictly.
+- Therefore, it also was helpful in finding out mistakes writers had made before, as well as in creating 269 HTML files in just a few seconds.
+
 
