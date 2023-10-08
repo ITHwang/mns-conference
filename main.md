@@ -17,11 +17,11 @@
 ## # 4
 - However, current LLMs are struggling with hallucinating problem which means that they sometimes generate text that factually incorrect or nonsensical.
 - This problem is more critical to the regulation chatbot, because both writing official documents and handling tasks are on the basis of regulations, so wrong informaiton about regulations can let officers to get confused and cause poor communication between them.
-- Thus, as you guys can see, we designed a chatbot arhitecture like that, in which an information retrieval model, so-called "Retriever", searches relevant regulations and articles, so-called "조문" in korean, based on similarity with a given query.
+- Thus, to address this problem, we designed a chatbot arhitecture like that, in which an information retrieval model, so-called "Retriever", searches relevant regulations and articles, so-called "조문" in korean, based on similarity with a given query.
 - Then the LLM can receives search result from retriever and generate a more reliable answer by referring it.
 
 ## # 5
-- In order to find more exactly relevant regulations and articles, we've decided to make a knowledge base for korean naval regulations by extracting text from raw pdf files and organizing them in a structured form.
+- In order to find more exactly relevant regulations and articles, we've decided to make a knowledge base for korean naval regulations by extracting data from raw pdf files and organizing them in a structured form.
 - So, in the presentation, we suggest a data pipeline in which raw regulation data is extracted, tranformed, and loaded into the knowledge base.
 - And then, we put the knowledge base to the test by applying to the latest open-source retriever to check out how well the knowledge base has been constructed.
 
@@ -34,7 +34,7 @@
 
 ## # 7
 - So, let's move on to a brief trend in retriever.
-- Classically, as a statistical approach for searching documents, Bag-Of-Words algorithm is widely used.
+- Classically, as a statistical approach for searching documents, Bag-Of-Words algorithm has been widely used.
 - Before receiving queries, the algorithm give weight to each words in all documents based on word frequency.
 - At that time, basically, the more often a word appears, the more weight it has.
 - But if the word appears across all documents, its weight would be reduced, because it is used so usually that it may not have to do with specific documents such as personal pronouns and prepositions.
@@ -46,7 +46,7 @@
 - But, the classical approach has two limitations. 
 - Actually, when it performs, It creates a vocabulary.
 - And when making vectors, it refers only stuff about words in the vocabulary, as ignoring unknown words out of the vocabulary.
-- Besides, even if a query has synonyms of words in the vocabulary, the algorithm cannot answer properly because it still perceives the synonyms as unknown words.
+- Therefore, even if a query has synonyms of words in the vocabulary, the algorithm cannot answer properly because it still perceives the synonyms as unknown words.
 - From last years, however, Deep Learning has been approved as one of the powerful algorithms and it starts to be applied to resolve the limitations.
 - As you guys can see on the right, Dense Vector model, as a deep Learning approach, receives queries and documents and outputs their vectors directly.
 - At that time, in addition to resolving the limitations, it also comprehends contextual meaning of words, which can facilitates creating optimal vectors of long-text documents.
@@ -56,12 +56,29 @@
 - So, we got 269 regulation pdf files from Korean Navy's intranet.
 - And in order to construct the HTML-formated knowledge base, we firstly had to go through a preprocessing pipeline in which raw pdf files can be converted to cleansed and organized text files.
 - It took us about 3 months to go through the pipeline.
-- At the same time, we succeeded in implementing automation in preprocessing and HTML construction except for one or two manual steps, through which we hope that it's much easier and faster to construct knowledge bases for other regulations in military afterward.
+- **(put some limitations like manual steps and blocked images and tables)**
+- At the same time, we succeeded in implementing automation in preprocessing and HTML construction except for one or two manual steps, through which we hope that it's much easier and faster to construct knowledge bases for other military regulations afterward.
 
 ## # 10
-- Fo automation in HTML construction, we first check out regulation writing rules written by Korean Navy.
+- For automation in HTML construction, we first check out regulation writing rules written by Korean Navy.
 - Then following the rules, we established some strategies, and based on them we created definitions for clauses like this table on the right, and finally wrote python code for the automation.
 - Actually, as I said, the automation is following the regulation writing rules strictly.
 - Therefore, it also was helpful in finding out mistakes writers had made before, as well as in creating 269 HTML files in just a few seconds.
 
+## # 11
+- As you guys can see, regulation data is stored in the structured form as surrounded by customized HTML tags we made.
+- And meta data of clauses, like titles, revision dates, and orders of clauses, is embedded as attributes of each tag.
+- Besides, when opening these HTML files on a web browers, like Chrome or Microsoft Edge, we can get contents in the files as easily as we do in the pdf files.
 
+## # 12
+- Consequently, we've structured 10,379 articles in 269 naval regulations.
+- And then, excepting 476 articles deleted by revisions before, we utilize 9,903 articles, in which the retriever can find articles related to queries.
+
+## # 13
+- Then using the knowledge base, we made some experiments to make sure quality of the knowledge base and performance of the retriever.
+- To do that, we first planned to make 1,000 pairs of query and related article as one-to-one mappings from naval regulations.
+- So we assigned the number of queries to each regulations in proportion to the amount of the regulation so that we could make more query about regulations that include more contents.
+
+- declarative and imperative as well as interrogative...
+- 80 diagram queries...
+- 50 higer-law queries...
