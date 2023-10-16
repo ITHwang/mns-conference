@@ -61,7 +61,7 @@
 
 ## # 10
 - Next, for automation in HTML construction, we check out regulation writing rules written by Korean Navy.
-- Then following the rules, we established some strategies, and created definitions for clauses like this table on the right side, and finally implemented these things with Python.
+- Then following the rules, we established some strategies, and created tag definitions for clauses like this table on the right side, and finally implemented these things with Python.
 - Accordingly, we could create 269 HTML files in just a few seconds.
 
 ## # 11
@@ -82,15 +82,27 @@
 
 ## # 14
 - And then, as I said, we utilized the multilingual version of E5 model as the retriever with some required options.
-- We also selected three metrics to evaluate ranking lists of documents which are regulations and articles as outputs of the model.
+- We also selected three metrics to evaluate ranking lists of documents as model's outputs.
 - MRR calculates depending on what the ranking of the most query-related document is.
 - At that time, the most query-related document should be in the top K documents, otherwise the score will be 0.
 - The closer the document's ranking is to top, the closer the score is to 1, on the other hand, the farther the document's ranking is from top, the closer the score is to 0.
 - Next, Recall calculates depending on the number of documents found by the models among the correct top K query-relevant documents.
-- the more the model finds documents in the correct documents, the closer the score is to 1, on the other hand, the less the model does, the closer the score is to 0.
+- The more the model finds documents in the correct documents, the closer the score is to 1, on the other hand, the less the model does, the closer the score is to 0.
 - We set K to only 1, because in our simple dataset every query has one relevant regulation and one relevant article.
-- Lastly, Top K Accuracy calculates depending on if the most query-relevant document is in the top K query-relevant documents inferred by the model.
-- 전체 쿼리 개수 중에서 이에 해당하는 쿼리 개수 만큼의 비율을 점수로 산정함. 
+- Lastly, Top K Accuracy takes account of whether the most query-relevant document is in the top K query-relevant documents inferred by the model.
+- And then, it counts the number of cases in which model's output meets this condition and calculates the proportion of them.
 
 ## # 15
-- aaa
+- HTML basically uses tags and their attributes through which we contained meta information of sentences or paragraphs in regulations.
+- The next step is to convert the data in the knowledge base to the input data of the retriever for creating vector representations.
+- This step is so crucial to the performance of the retriever, because the vector representations are finally used to calculate the similarity with queries.
+- Thus we put 5 converting options, also known as embedding options.
+- First one and second one make use of customized tags which are mapped to clauses in regulations respectively.
+- And first inserts attributes into the tags, whereas second doesn't.
+- Third one and fourth one make use of standard tags which are already defined as web standards.
+- And third inserts attributes into the tags, whereas fourth doesn't.
+- Last embedding option is to remove all tags and attributes leaving the plain text in the tags.
+- In addition, we're gonna compare the results of these options to the performance of the same retriever on another question-answering dataset for evaluating the quality and difficulty of our dataset.
+
+## # 16
+
