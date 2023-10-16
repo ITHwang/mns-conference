@@ -105,4 +105,7 @@
 - In addition, we're gonna compare the results of these options to the performance of the same retriever on another question-answering dataset for evaluating the quality and difficulty of our dataset.
 
 ## # 16
-
+- Let's take a look the results. 
+- The first metric evaluates how well embeddings find the most query-relevant regulation in the 269 regulations and calculates the score based on the ranking of the most relevant one that the retriever predicted.
+- The retriever shows the highest performance with about 88 out of a hundred, when getting the text that is surrounded by customized tags and attributes as an input.
+- On the other hand, 
