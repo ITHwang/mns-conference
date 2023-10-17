@@ -83,13 +83,12 @@
 ## # 14
 - And then, as I said, we utilized the multilingual version of E5 model as the retriever with some required options.
 - We also selected three metrics to evaluate ranking lists of documents as model's outputs.
-- MRR calculates depending on what the ranking of the most query-related document is.
-- At that time, the most query-related document should be in the top K documents, otherwise the score will be 0.
+- MRR at K calculates depending on what the ranking of the most query-related document is in the top K documents inferred by the retriever.
 - The closer the document's ranking is to top, the closer the score is to 1, on the other hand, the farther the document's ranking is from top, the closer the score is to 0.
-- Next, Recall calculates depending on the number of documents found by the models among the correct top K query-relevant documents.
+- Next, Recall at K calculates depending on the number of documents found by the models among the correct top K query-relevant documents.
 - The more the model finds documents in the correct documents, the closer the score is to 1, on the other hand, the less the model does, the closer the score is to 0.
-- We set K to only 1, because in our simple dataset every query has one relevant regulation and one relevant article.
-- Lastly, Top K Accuracy takes account of whether the most query-relevant document is in the top K query-relevant documents inferred by the model.
+- We set K to only 1, because in our simple dataset every query has one relevant regulation or one relevant article.
+- Lastly, Top at K Accuracy takes account of whether the most query-relevant document is in the top K query-relevant documents inferred by the model.
 - And then, it counts the number of cases in which model's output meets this condition and calculates the proportion of them.
 
 ## # 15
@@ -106,6 +105,12 @@
 
 ## # 16
 - Let's take a look the results. 
-- The first metric evaluates how well embeddings find the most query-relevant regulation in the 269 regulations and calculates the score based on the ranking of the most relevant one that the retriever predicted.
-- The retriever shows the highest performance with about 88 out of a hundred, when getting the text that is surrounded by customized tags and attributes as an input.
-- On the other hand, 
+- In Regulation MRR at 10 and at 20, The retriever shows the highest performance with about 90 out of a 100, when we convert the text with standard tags and attributes to vector representations.
+- On the other hand, considering the fact that the same retriever with another dataset shows much lower performance, we can suppose that it is so easier to find query-relevant regulations than documents in another dataset.
+- On the right side, in Regulation TOP at 5, 10, and 20 Accuracy, the retriever shows the highest performance with near perfect score, when we convert the text with custom tags and attributes to vector representations.
+- But it seems more adequate to use the text with standard tags and attributes, because in Recall at 1, its score is higher than that of the text with custom tags and attributes.
+- Besides, There are very small differences between them in other Accuracy metrics.
+
+## # 17
+- ddfdf
+
