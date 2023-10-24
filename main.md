@@ -1,151 +1,135 @@
-## # 1
+# 1
 - Hello, ladies and gentlemen.
 - I'm Hwang In Taek, a Korean Navy Petty Officer second, on a duty of military service in the Naval Future Innovation Research Group.
-- I'm honored to introduce our project and recent experimental results to you guys.
+- I'm honored to introduce our project.
 
-## # 2
-- The order of this presentation is like that.
+# 2
+- This is the order of presentation.
 
-## # 3
-- For more than 10 years, big tech companies, such as OpenAI, Meta, Google, have been sparing no expense for developing Large Language Models, LLMs, as one of the generative AI.
-- And now, LLM has undoubtedly become one of the most powerful technologies, changing the greater part of interfaces in most industries.
-- Following the trend, from December 2021, we have started to construct the Naval Regulation Chatbot system, in which users can input what they wanna ask about regulation and get the answer from the LLM.
-- As a matter of fact, the current naval regulation search system only depends on keyword-based search algorithm which cannot find suitable regulations unless words in a query and regulations are exactly matched each other.
-- Therefore, to increase accessibility to regulations and utilization of them, our project aims to make the Naval Regulation Chatbot which can analyze a query semantically and contextually and response to it in a dialog form.
-- This system can contribute to improving work efficiency and providing useful guidelines for junior officers.
+# 3
+- Nowadays, LLM has undoubtedly become one of the most powerful technologies, changing the greater part of interfaces in most industries.
+- OpenAI uses LLM to create a ChatBot in its platform to interact with users seamlessly.
+- Also, Amazon, which is one of the biggest tech companies, uses LLM to run Alexa. 
+- So, What is LLM?
+- LLM stands for Large Language Model. 
+- It's a machine-learning model that can understand and create human language using neural networks.
+- Using LLM, we have started to develop the Naval Regulation Chatbot, in which users can search for regulation in a conversational style. 
+- Actually, the current regulation search system only depends on keyword-based algorithms that make it inflexible on human language.
+- That's why our team is developing the regulation chatbot, hoping that it helps users find the contents of regulations more efficiently and accurately.
 
-## # 4
-- However, current LLMs are struggling with hallucinating problem which means that they sometimes generate text that factually incorrect or nonsensical.
-- This problem is more critical to the regulation chatbot, because both writing official documents and handling tasks are on the basis of regulations, so wrong information about regulations can let officers to get confused and cause poor communication between them.
-- Thus, to address this problem, we designed a chatbot architecture like that, in which an information retrieval model, so-called "Retriever", searches relevant regulations and articles, so-called "조문" in Korean, based on similarity with a given query.
-- Then the LLM can receives search result from retriever and generate a more reliable answer.
+# 4
+- However, current LLMs are struggling with a hallucinating problem: a case when the model generates text that is factually incorrect or nonsensical.
+- This problem is more critical to the regulation chatbot because most official documents are fully based on regulations.
+- Thus, to address this problem, we designed a chatbot architecture in the picture, in which an information retrieval model, the so-called "Retriever", searches relevant regulations and articles based on similarity with a given query.
+- Then the LLM receives search results from the retriever and returns a more reliable answer.
 
-## # 5
-- In order to find more exactly relevant regulations and articles, we've decided to make a knowledge base for Korean naval regulations by extracting data from raw pdf files and organizing them in a structured form.
-- So, in the presentation, we suggest a data pipeline in which raw regulation data is extracted, transformed, and loaded into the knowledge base.
-- And then, we put the knowledge base to the test by applying to the latest open-source retriever to confirm how well the knowledge base has been constructed.
+# 5
+-   For better search performance, We made the retriever into a data-centric AI that focuses on the quality of the input data rather than its intelligence.
+-   So, in the presentation, we suggest a data preprocessing pipeline in which raw regulation data is extracted, transformed, and stored as cleansed data.
+-   Using the data, we share some strategies for building a knowledge base for Korean naval regulations.
+-   Finally, we conduct experiments with the knowledge base and the latest open-source retriever to evaluate the quality of the data.
 
-## # 6
-- Actually, there are many structured formats we can utilize for constructing the knowledge base, such as RDBMS, excel, etc.
-- we chose HTML among them, because we can easily view non-text data like tables and images just through web browsers as well as plain text.
-- And data can be marked up by tags hierarchically, which make it suitable for legal text data.
-- Finally, We can build a self-made question-answering dataset using them, which helps improve the performance of retrievers and LLMs.
-## # 7
-- So, let's move on to a brief trend in retriever.
-- Classically, as a statistical approach for searching documents, Bag-Of-Words algorithm is widely used.
-- Before receiving queries, the algorithm give weight to each words in all documents based on word frequency.
-- At that time, basically, the more often a word appears, the more weight it has.
-- But words like personal pronouns or prepositions appears across all documents, so that its weight would be reduced, because they're used so usually that they don't have to do with specific documents. 
-- On the other hand, words about some topics often appears in specific documents, so that they can get more weight because they're likely to implicit topics of the documents.
-- So, when we get a query, we can create query vector and document vectors based on the words in the query.
-- Finally we can find relevant documents that have vectors in the proximity of the query vector.
+# 6
+- Actually, there are many structured formats we can utilize for building the knowledge base.
+- Our team chose HTML, in which non-text data like tables and images can be easily viewed just through a web browser as well as plain text.
+- And data can be marked up by tags hierarchically, which makes it suitable for legal data.
+- Lastly, using the data, we can build question-answering datasets which can help upgrade retrievers and LLMs later.
 
-## # 8
-- But, the classical approach has two limitations. 
-- The fact is, It needs the vocabulary that includes information about words in all documents.
-- And when making vectors, it refers only stuff about words in the vocabulary, as ignoring unknown words out of the vocabulary.
-- Moreover, even if a query has synonyms of words in the vocabulary, the algorithm cannot answer properly because it still perceives the synonyms as unknown words.
-- From last years, however, Deep Learning has been approved as one of the powerful algorithms and it starts to be applied to resolve the limitations.
-- As you guys can see on the right, Dense Vector model, as a deep Learning approach, receives queries and documents and returns their vectors directly.
-- At that time, in addition to resolving the limitations, it also comprehends contextual meaning of words, which can facilitates creating optimal vectors of documents.
-- Eventually, we selected E5 model, as the state-of-the-art model by Microsoft, to verify quality of the knowledge base and the performance of the retriever in a military domain.
+# 7
+- Let's move on to a brief trend in retrievers.
+- Classically, as a statistical approach, the Bag-Of-Words algorithm is widely used.
+- The algorithm calculates word frequency in all documents to give weight to the frequently used words.
+- In particular, it gives higher weight to meaningful keywords.
+- But it gives lower weight to grammatical words that don’t have semantic meaning.
+- After measuring the weights, it creates their vectors and estimates similarity with a query vector.
+- The document with the highest proximity will be the most relevant.
 
-## # 9
-- So, we got 269 regulation pdf files from Korean Navy's intranet and designed a preprocessing pipeline in which these raw files can be converted to the cleansed text files.
-- At that time, we preprocessed only text data as leaving behind table and image data for shortening the preprocessing period.
-- We're gonna deal with this issue in conclusion.
-- Consequently, It took us about 3 months to go through the pipeline.
-- We succeeded in automating preprocessing except for two or three manual steps, through which we hope that it's much easier and faster to construct knowledge bases of other military regulations afterward.
+# 8
+- However, this approach has two limitations.
+- Firstly, it ignores unseen words in the query when creating the vector.
+- Secondly, it doesn't recognize synonyms, which means users have to input the same words in documents to search for the documents they want.  
+- To overcome the limitations, our team used the Dense Vector model to create query and document vectors, without depending solely on word frequency.
+- Also, this model can understand contextual meaning, which helps create optimal vectors.
+- Among the dense vector models, we chose the state-of-the-art open-source model, called E5 created by Microsoft.
 
-## # 10
-- Next, for automation in HTML construction, we check out regulation writing rules written by Korean Navy.
-- Then following the rules, we established some strategies, and created tag definitions like this table on the right, and finally implemented these things with Python.
-- Accordingly, we can create 269 HTML files in just a few seconds.
+# 9
+- To construct a knowledge base, we converted 269 regulation PDF files to preprocessed text files.  
+- We succeeded in automating the data pipeline except for a few manual steps, through which it'll be easier and faster to build knowledge bases of other military regulations.
 
-## # 11
-- As you guys can see, regulation data is stored in the structured form with customized HTML tags.
-- And meta data of clauses like titles, revision dates, and orders of clauses, is embedded as attributes of the each tag.
-- Besides, when opening these HTML files on a web browser, like Chrome or Microsoft Edge, we can read contents in the files as easily as we do in the pdf files.
+# 10
+- Next, to automate HTML construction, our team had a deep dive into the structure of regulations and regulation rules, and established construction strategies including how to customize HTML tags, how to insert inner clauses into outer clauses, and so on.
 
-## # 12
-- In the knowledge base, we've structured 10,379 articles in 269 naval regulations.
-- And then, removing 476 articles deleted by revisions earlier, we can now utilize 9,903 articles, in which the retriever can find query-related articles.
+# 11
+- As the picture shows, regulation data is stored in an HTML file.
+- And metadata of clauses like titles, revision dates, and clause numbers, is embedded as attributes of HTML tags.
+- Besides, when opening these files on a web browser, we can read the contents as easily as we do in the PDF files.
 
-## # 13
-- Then using the knowledge base, we made some experiments to make sure the quality of the knowledge base and the performance of the retriever in a military domain.
-- To do that, we decided to make a simple question-answering dataset consisting of 1,000 pairs of querys and articles as one-to-one mappings.
-- And then, we assigned the number of queries to each regulations in proportion to the amount of the regulation, so that we could make more queries about bigger regulations.
-- 1,000 pairs were made manually by 3 people for about 2 weeks, including declarative and imperative queries as well as interrogative queries.
-- We also included 80 diagram queries that can be answered based on tables or images in query-related articles and 50 higher-law queries that can be answered based on upper regulations referred in query-related articles.
+# 12
+- In the knowledge base, we have structured 10,379 articles from 269 naval regulations.
+- By removing 476 articles deleted by revisions, we can now utilize 9,903 articles, in which the retriever can find query-related articles.
 
-## # 14
-- And then, as I said, we utilized the multilingual version of E5 model as the retriever.
-- We also selected three metrics to evaluate ranking lists of documents created by the retriever.
-- MRR at K calculates depending on what the ranking of the most query-related document is in the top K documents inferred by the retriever.
-- The closer the document's ranking is to top, the closer the score is to 1, on the other hand, the farther the document's ranking is from top, the closer the score is to 0.
-- Next, Recall at K calculates depending on the number of documents found by the models among the correct top K query-related documents.
-- The more the model finds documents in the correct documents, the closer the score is to 1, on the other hand, the less the model does, the closer the score is to 0.
-- We set K to only 1, because in our simple dataset every query has one relevant regulation or one relevant article.
-- Lastly, Top at K Accuracy takes account of whether the most query-related document is in the top K query-related documents inferred by the model.
-- And then, it counts the number of cases in which model's output meets this condition and calculates the proportion of them.
+# 13
+- And then we conducted experiments to make sure the quality of the knowledge base as well as the performance of the retriever in the military domain.
+- To do so, we created a simple question-answering dataset consisting of 1,000 pairs of queries and articles.
+- We also included 80 diagram queries that can be answered based on tables or images.
+- And 50 higher-law queries that can be answered based on upper regulations like the Ministry of Defense Instruction which is "국방부 훈령" in Korean.
 
-## # 15
-- HTML basically uses tags and attributes through which we can contain meta information of sentences or paragraphs.
-- The next step is to convert the data in the knowledge base to the input data of the retriever for creating vector representations.
-- This step is so crucial to the performance of the retriever, because the vector representations are finally used to calculate the similarity with queries.
-- Thus we put 5 converting options, also known as embeddings.
-- The first one and the second one make use of customized tags which are mapped to clauses respectively.
-- And the first inserts attributes into the tags, whereas the second doesn't.
-- The third one and the fourth one make use of standard tags which are already defined as web standards.
-- And the third inserts attributes into the tags, whereas the fourth doesn't.
-- Last embedding option is to remove all tags and attributes by leaving the plain text.
-- In addition, we're gonna compare the results of these options to the performance of the same retriever on another question-answering dataset for evaluating the quality and difficulty of our dataset.
+# 14
+- We utilized the multilingual version of the E5 model as the retriever.
+- The retriever finds the relevant documents by sorting all the documents in similarity order.
+- So, we chose three metrics to evaluate the ranking lists of documents created by the retriever.
+- MRR at K is calculated based on the ranking of the most query-related document.
+- Recall at K is measured by how many documents the retriever finds among the correct top K documents.
+- Lastly, Top at K Accuracy counts the number of cases when the most query-related document is in the top K documents arranged by the model.
 
-## # 16
-- Let's take a look the results. 
-- In Regulation MRR at 10 and 20, the retriever shows the highest performance with about 90 out of a hundred, when we convert the text with standard tags and attributes to vector representations.
-- On the other hand, considering the fact that the same retriever with another dataset shows much lower performance, we can suppose that it's so easier to find query-related regulations than documents in another dataset.
-- On the right, in Regulation TOP at 5, 10, and 20 Accuracy, the retriever shows the highest performance with near perfect score, when we convert the text with custom tags and attributes to vector representations.
+# 15
+- The next step is to convert the knowledge base to the input data for the retriever to create document vectors.
+- It's crucial to the retriever's performance because the vectors are used for scoring the similarity with queries.
+- There are 5 converting options, also known as embedding options.
+- The first one and the second one make use of customized tags.
+- The first includes attributes, but the second doesn't.
+- The third one and the fourth one make use of standard tags.
+- The third includes attributes, but the fourth doesn't.
+- The last embedding makes use of the plain text by removing all tags and attributes.
+- Furthermore, we're going to compare these options to the same retriever on another dataset, which helps evaluate the quality and difficulty of our dataset.
 
-## # 17
-- Next, in Article MRR at 10 and 20, the retriever shows the highest performance, when we utilize the text with standard tags and attributes.
-- It's about 72 out of a hundred.
-- It's more challenging than Regulation MRR, because it's difficult to find the most query-related article among about 10,000 articles and put it closer to the highest in the ranking list.
-- Nonetheless, as you guys can see that the retriever on our dataset shows the higher score than that on another dataset, we confirm that the quality of the knowledge base is high enough to be used.
-- Meanwhile, on the right side, the retriever shows lower performance when receiving the queries that can only be answered based on tables or images.
-- It's because we left tables and images as black boxes at the earlier preprocessing step.
-- It also doesn't do very well when receiving the queries that can only be answered based on upper regulations like the Ministry of Defense Instruction, "국방부 훈령" in Korean.
-- It's because the articles related to the queries usually has such a short sentence that it's hard to get high similarity between the articles and the queries.
+# 16
+- So, let's take a look at the results.
+- In Regulation MRR at 10 and 20, the retriever shows the highest performance with about 90 out of 100, when choosing the text with standard tags and attributes.
+- Moreover, this retriever outperforms the same retriever with another dataset, which means it's relatively easy to find query-related regulations.
+- In Regulation TOP at 5, 10, and 20 Accuracy, the retriever shows a near-perfect score, when choosing the text with custom tags and attributes.
 
-## # 18
-- In Article TOP at 1, 5, 10, and 20 Accuracy, we can get the highest performance, when using the text with standard tags and attributes.
-- It's obvious that Article TOP Accuracy is more challenging than Regulation TOP Accuracy.
-- In spite of that, it shows the prominent performance at TOP 10 and 20 Accuracy by going beyond 90 out of a hundred.
-- And, in the graph on the right, as it does in Article MRR, it's hard to answer the diagram queries and the upper-law queries.
+# 17
+- Next, in Article MRR at 10 and 20, the retriever shows the highest performance, when choosing the text with standard tags and attributes.
+- It's more challenging than Regulation MRR because it's difficult to find the most query-related article among about 10,000 articles.
+- Nonetheless, the retriever on our dataset outperforms the same retriever on another dataset, which means the quality of the knowledge base is high enough to be used for our chatbot.
+- Meanwhile, on the right side, the retriever shows lower performance on diagram queries, because tables and images were ignored at the preprocessing step.
+- It also doesn't do very well for higher-law queries, because these articles usually have such short sentences that it's hard to get a high similarity with a given query.
 
-## # 19
-- In conclusion, I'm gonna wrap up the presentation by sharing two further issues and two expected effects.
-- The first issue is about non-text data that is covered by black boxes at the preprocessing step.
-- In order to improve the retriever's ability to answer the diagram queries, tables and images in the regulations should be preprocessed by transforming them to HTML tags.
-- However, the number of non-text data in the Korean Naval Regulations is now 985.
-- Therefore, it seems that we should take steps to automate the process.
-- Meanwhile, after making the retriever as an auxiliary model, the next step we should take is absolutely to apply the retriever to a LLM.
-- But currently, I heard that the Defense Integrated Data Center, also known as DIDC, doesn't have enough GPUs to be available for LLM.
-- To go beyond the limitation, the DIDC is establishing Defense Intelligent Platform by collaborating with KT, well-known Korean telecommunication company.
-- We hope that on the platform we can utilize the LLM and complete the chatbot project.
+# 18
+- In Article TOP Accuracy, we can get the highest performance, when choosing the text with standard tags and attributes.
+- As the graph on the left shows, Article TOP Accuracy is more challenging than Regulation TOP Accuracy.
+- Despite that, it shows an outstanding performance at TOP 10 and 20 Accuracy by exceeding 90 out of 100.
+- And, in the graph on the right, it's still hard to answer the diagram queries and the higher-law queries.
 
-## # 20
-- Consequently, the preprocessing pipeline and the strategies for constructing the Knowledge base will help construct other Korean military regulations afterward.
-- I think that the Ministry of Defense Instruction should be constructed to the knowledge base secondly.
-- It's because many Korean military regulations are strongly following the instruction, which makes the retriever easily find the documents related to queries about them.
-- Lastly, I've heard that the Ministry of Defense is planning to make the Ministry of Defense standard datasets to adapt AI models to military domains by training them with the datasets.
-- Knowledge bases of military regulation can contribute to build the Ministry of Defense question-answering dataset, as one of the standard datasets.
-- The retriever can also contribute to reduce the time to build the dataset, by finding documents related to queries in the knowledge bases.
-- The last thing we should do for making the question-answering dataset is to response to the queries based on the documents found by the retriever.
+# 19
+- I’d like to wrap up the presentation by sharing two further issues and two expected effects.
+- The first issue is about ignored non-text data.
+- To improve the retriever's ability to answer the diagram queries, tables and images in the regulations should be preprocessed and transformed into HTML tags.
+- And the next step is to attach the retriever to an LLM.
+- However, at this moment, the Defense Integrated Data Center, also known as DIDC, doesn't have enough GPUs for LLM.
+- To address the problem, the DIDC is currently establishing the Defense Intelligent Platform with KT, the Korean telecommunication company.
 
-## # 21
+# 20
+- Consequently, the preprocessing pipeline and the strategies for the Knowledge base will help construct those of other Korean military regulations afterward.
+- In particular, the Ministry of Defense Instruction should be established, because many Korean military regulations are strongly following the instruction.
+- Last but not least, the Ministry of Defense is planning to make standard datasets to adapt AI models to military domains.
+- Knowledge bases of military regulations can help build the standard question-answering dataset.
+- The retriever can also contribute to reducing the time to build the dataset, by finding query-related documents much faster than humans.
+
+# 21
 - Thank you for listening to me so far.
 - Does anyone have any questions?
 
-## # 22
+# 22
 - Thank you so much!
