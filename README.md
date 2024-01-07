@@ -3,4 +3,4 @@
 - Subject: A Knowledge base for Question Answering with Korean Military Regulations
 - Contents
 	- script
-	- ppt: coming soon..
+	- [ppt](./mns_ppt.pdf)
