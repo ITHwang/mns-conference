@@ -1,6 +1,5 @@
-- A presentation in 16th International Army Modeling & Simulation Education Conference.
+- Hwang, Kim, Kang, & Jung. (2023). A Knowledge base for Question Answering with Korean Military Regulations. In *16th International Army Modeling & Simulation Education Conference*.
 - won R.O.K. Army Analysis and Evaluation Director General's Award.
-- Subject: A Knowledge base for Question Answering with Korean Military Regulations
 - Contents
 	- script
 	- [ppt](./mns_ppt.pdf)
