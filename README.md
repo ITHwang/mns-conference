@@ -2,4 +2,4 @@
 - won R.O.K. Army Analysis and Evaluation Director General's Award.
 - Contents
 	- script
-	- [ppt](./mns_ppt.pdf)
+	- [ppt](./mns_ppt.pdf)(completed an internal security review in the military).
