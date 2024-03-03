@@ -1,5 +1,7 @@
 - Hwang, Kim, Kang, & Jung. (2023). A Knowledge base for Question Answering with Korean Military Regulations. In *16th International Army Modeling & Simulation Education Conference*.
-- won R.O.K. Army Analysis and Evaluation Director General's Award.
+- Abstract
+	- Although the interest of Large Language Model(LLM) like ChatGPT is substantially growing all over the world, Existing models still are not fully reliable(especially Hallucination problem), which is critical to Question Answering with regulations. So utilizing Information Retrieval models(Retrievers), as auxiliary models, is also highly demanded to prevent from generating hallucinated facts as they can provide reliable passages as reasons with LLM. Therefore, we construct a knowledge base for Korean Navy Regulation to provide the retriever with high-quality regulation data, which makes the retriever find more relevant passages. The preprocessing and construction strategies we suggest on this paper can be used for other Natural Language Processing tasks and applied to the other regulations. To evaluate quality of the knowledge base, we build 1,000 Query-Passage pairs by extracting articles from it. we test state-of-the-art IR model with the pairs and confirm that it shows enough performance to be available for giving relevant passages to users.
 - Contents
-	- script
 	- [ppt](./mns_ppt.pdf)(completed an internal security review in the military).
+	- [ppt script](./script.md)
+- Won Director General of Center for Army Analysis and Simulation's Award.
